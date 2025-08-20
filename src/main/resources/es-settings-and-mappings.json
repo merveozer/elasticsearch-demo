@@ -1,0 +1,79 @@
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "synonym_filter": {
+          "type": "synonym_graph",
+          "synonyms": [
+            "fan, ventilator, air-mover",
+            "charger, power adapter, charging cable, power supply",
+            "fridge, refrigerator",
+            "freezer, deep freezer",
+            "washing machine, washer"
+          ]
+        }
+      },
+      "analyzer": {
+        "synonym_analyzer": {
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "synonym_filter"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "keyword"
+      },
+      "name": {
+        "type": "text",
+        "analyzer": "synonym_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "description": {
+        "type": "text",
+        "analyzer": "synonym_analyzer"
+      },
+      "brand": {
+        "type": "keyword"
+      },
+      "category": {
+        "type": "keyword"
+      },
+      "price": {
+        "type": "double"
+      },
+      "currency": {
+        "type": "keyword"
+      },
+      "stock": {
+        "type": "integer"
+      },
+      "ean": {
+        "type": "keyword"
+      },
+      "color": {
+        "type": "keyword"
+      },
+      "size": {
+        "type": "keyword"
+      },
+      "availability": {
+        "type": "keyword"
+      },
+      "suggestions": {
+        "type": "text",
+        "analyzer": "synonym_analyzer"
+      }
+    }
+  }
+}
