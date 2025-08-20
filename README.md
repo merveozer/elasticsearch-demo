@@ -85,10 +85,10 @@ output {
   elasticsearch {
     hosts => ["http://localhost:9200"]
     index => "products"
-
-```
   }
   stdout {
     codec => rubydebug
   }
 }
+
+```
