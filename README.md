@@ -50,7 +50,9 @@ Once the application is running, the API documentation is available at http://lo
 # How to import your csv file to ElasticSearch
 # Use Logstash, create a conf file using below code part. 
 
-# Then run this command on the terminal on your the directory which is installed logstash:   C:\dev\logstash-9.1.2\bin> logstash -f C:/conf-file.conf
+# Then run this command on the terminal on your the directory which is installed logstash:   
+
+# C:\dev\logstash-9.1.2\bin> logstash -f C:/conf-file.conf
 
 
 ```
