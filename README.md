@@ -46,3 +46,50 @@ This project includes a product search API designed for e-commerce platforms. It
   Re-index Data: Use your Logstash pipeline or a dedicated service to populate Elasticsearch with your product data.
 
 Once the application is running, the API documentation is available at http://localhost:8080/swagger-ui.html
+
+# How to import your csv file to ElasticSearch
+# Use Logstash, create a conf file using below code part. 
+
+# Then run this command on the terminal on your the directory which is installed logstash:   C:\dev\logstash-9.1.2\bin> logstash -f C:/conf-file.conf
+
+
+```
+input {
+  file {
+    path => "C:/dev/products.csv"
+    start_position => "beginning"
+    sincedb_path => "NUL"
+  }
+}
+
+filter {
+  csv {
+    separator => ","
+    columns => ["_id","name","description","brand","category","price","currency","stock","ean","color","size","availability","internalId"]
+  }
+
+   if [_id] == "_id" {
+    drop { }
+  }
+
+  mutate {
+    convert => {
+      "price" => "integer"
+      "stock" => "integer"
+      "internalId" => "integer"
+    }
+    remove_field => ["message", "event", "log", "host", "tags", "_id"]
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["http://localhost:9200"]
+    index => "products"
+
+```
+  }
+  stdout {
+    codec => rubydebug
+  }
+}
